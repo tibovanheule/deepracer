@@ -12,7 +12,7 @@ def reward_function(params):
     
     progress = params['progress']/100.0 #scale to 0...1
     waypoints = params['waypoints']
-    throttle = params['speed']/5.0
+    throttle = params['speed']
     closest_waypoints = params['closest_waypoints']
     heading = params['heading']
     
@@ -20,32 +20,23 @@ def reward_function(params):
         reward = 1e5
     else:
         reward *= progress
-        
-    ######################
-    ###### Steering ######
-    ######################
 
-    # 
-    waypoint_yaw = waypoints[closest_waypoints[0]][-1]
+    waypoint_yaw = waypoints[closest_waypoints[1]][-1]
     if abs(heading - waypoint_yaw) >= math.radians(10):
         reward *= 0.25
     else:
         reward *= 1.25
 
-    ######################
-    ###### Throttle ######
-    ######################
-
     # Gotta go fast
     if throttle < 1.5:
-        reward * 0.5
+        reward *= 0.5
     else:
-        reward *= (1 + throttle)
+        reward *= (1 + throttle/5)
 
     # min max
     if reward < -1e5:
         return float(-1e5)
     elif reward > 1e5:
         return float(1e5)
-
+    
     return float(reward)
