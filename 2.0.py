@@ -31,7 +31,7 @@ def reward_function(params):
     if throttle < 1.5:
         reward *= 0.5
     else:
-        reward *= (1 + throttle/5)
+        reward *= (1 + throttle/2)
 
     # min max
     if reward < -1e5:
