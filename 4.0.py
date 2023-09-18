@@ -37,19 +37,19 @@ def reward_function(params):
   
     if abs(turn) <= 0.01:
         # go fast, next 3 waypoint are nearly on one line
-        if speed == 3:
+        if throttle == 3:
             reward += 14
         else:
             reward -= (5-speed)**2
     elif abs(turn) <= 0.02:
         # go medium, next 3 waypoint are not exactly on one line, small turn
-        if speed == 2:
+        if throttle == 2:
             reward += 14
         else:
             reward -= 7
     else:
         # go slow, next 3 waypoint are not on one line
-        if speed == 1:
+        if throttle == 1:
             reward += 14
         else:
             reward -= (2+speed)**2
