@@ -15,14 +15,7 @@ def reward_function(params):
     throttle = params['speed']
     closest_waypoints = params['closest_waypoints']
     heading = params['heading']
-
-    # if steering is too much a away from next heading () to big angle, give smaller reward
-    waypoint_yaw = waypoints[closest_waypoints[1]][-1]
-    if abs(heading - waypoint_yaw) >= math.radians(10):
-        reward *= 0.25
-    else:
-        reward *= 1.20
-
+    
     # indexes
     current_waypoint = closest_waypoints[1] - 1
     next_waypoint = closest_waypoints[1] % len(waypoints)
@@ -53,6 +46,12 @@ def reward_function(params):
             reward += 14
         else:
             reward -= (2+throttle)**2
+    # if steering is too much a away from next heading () to big angle, give smaller reward
+    waypoint_yaw = waypoints[closest_waypoints[1]][-1]
+    if abs(heading - waypoint_yaw) >= math.radians(10):
+        reward *= 0.25
+    else:
+        reward *= 1.20
             
     if reward > 1e5:
         return float(1e5)
