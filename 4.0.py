@@ -35,26 +35,25 @@ def reward_function(params):
     turn = ((waypoint_second[0] - waypoint_first[0]) * (waypoint_third[1] - waypoint_first[1]) -  (waypoint_third[0] - waypoint_first[0]) * (waypoint_second[1] - waypoint_first[1]))
 
   
-    if abs(turn) < 0.01:
+    if abs(turn) <= 0.01:
         # go fast, next 3 waypoint are nearly on one line
         if speed == 3:
-          reward += 14
+            reward += 14
         else:
-          reward -= (5-speed)**2
-    elif abs(turn) < 0.02:
+            reward -= (5-speed)**2
+    elif abs(turn) <= 0.02:
         # go medium, next 3 waypoint are not exactly on one line, small turn
         if speed == 2:
-          reward += 14
+            reward += 14
         else:
-          reward -= 7
+            reward -= 7
     else:
         # go slow, next 3 waypoint are not on one line
         if speed == 1:
-          reward += 14
+            reward += 14
         else:
-          reward -= (2+speed)**2
-
-  
+            reward -= (2+speed)**2
+            
     if reward > 1e5:
         return float(1e5)
     
