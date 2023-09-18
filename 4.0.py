@@ -40,7 +40,7 @@ def reward_function(params):
         if throttle == 3:
             reward += 14
         else:
-            reward -= (5-speed)**2
+            reward -= (5-throttle)**2
     elif abs(turn) <= 0.02:
         # go medium, next 3 waypoint are not exactly on one line, small turn
         if throttle == 2:
@@ -52,7 +52,7 @@ def reward_function(params):
         if throttle == 1:
             reward += 14
         else:
-            reward -= (2+speed)**2
+            reward -= (2+throttle)**2
             
     if reward > 1e5:
         return float(1e5)
