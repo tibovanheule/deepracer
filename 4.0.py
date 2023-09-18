@@ -5,7 +5,7 @@ def reward_function(params):
     
     is_offtrack = params['is_offtrack']
     if is_offtrack:
-        return 0.001
+        return float(0.001)
     
     # Read input parameters
     distance_from_center = params['distance_from_center']
