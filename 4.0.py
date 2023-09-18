@@ -1,12 +1,4 @@
-
 import math
-
-# Collinear: d == 0
-# Clockwise turn: d > 0
-# Counterclockwise turn: d < 0
-# This is used to progmatically determine how fast we can go.
-def is_ccw(p0, p1, p2):
-    return ((p1[0] - p0[0]) * (p2[1] - p0[1]) -  (p2[0] - p0[0]) * (p1[1] - p0[1]))
 
 def reward_function(params):
 
@@ -40,7 +32,8 @@ def reward_function(params):
     waypoint_second = waypoints[next_waypoint]
     waypoint_third = waypoints[next_next_waypoint]
 
-    turn = is_ccw(waypoint_first,waypoint_second,waypoint_third)
+    turn = ((waypoint_second[0] - waypoint_first[0]) * (waypoint_third[1] - waypoint_first[1]) -  (waypoint_third[0] - waypoint_first[0]) * (waypoint_second[1] - waypoint_first[1]))
+
   
     if abs(turn) < 0.01:
         # go fast, next 3 waypoint are nearly on one line
